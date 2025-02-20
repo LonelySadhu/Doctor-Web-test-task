@@ -1,7 +1,8 @@
 from app.domain.database import Database
+from app.domain.use_cases.base_command_handler import BaseCommandHandler
 
 
-class CommandHandler:
+class CommandHandler(BaseCommandHandler):
     def __init__(self, database: Database):
         self.database = database
         self.command_strategies = {
