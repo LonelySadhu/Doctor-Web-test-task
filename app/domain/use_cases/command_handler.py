@@ -1,5 +1,5 @@
-from app.domain.database import Database
-from app.domain.use_cases.base_command_handler import BaseCommandHandler
+from domain.database import Database
+from domain.use_cases.base_command_handler import BaseCommandHandler
 
 
 class CommandHandler(BaseCommandHandler):
@@ -48,7 +48,7 @@ class CommandHandler(BaseCommandHandler):
     def find_command(self, args):
         if len(args) == 1:
             keys = self.database.find_keys_by_value(args[0])
-            return ' '.join(keys) if keys else 'NULL'
+            return ' '.join(keys) if keys else None
         return "Error: FIND command requires one argument (value)."
 
     def begin_transaction(self, args):
