@@ -1,4 +1,4 @@
-from domain.database import Database
+from app.domain.database import Database
 
 
 class InMemoryDatabase(Database):
