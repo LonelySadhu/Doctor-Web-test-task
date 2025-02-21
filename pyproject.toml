@@ -8,6 +8,7 @@ packages = [{include = "doctor_web_test_task"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
+pytest = "^8.3.4"
 
 
 [build-system]

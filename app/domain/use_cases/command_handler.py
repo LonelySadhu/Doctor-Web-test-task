@@ -1,5 +1,5 @@
-from domain.database import Database
-from domain.use_cases.base_command_handler import BaseCommandHandler
+from app.domain.database import Database
+from app.domain.use_cases.base_command_handler import BaseCommandHandler
 
 
 class CommandHandler(BaseCommandHandler):
