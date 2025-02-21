@@ -1,3 +1,20 @@
+# Запуск проекта  
+```bash
+pip install poetry  
+``` 
+```bash
+poetry install --no-root
+``` 
+
+```bash
+poetry run python -m app.main
+``` 
+
+# Запуск тестов  
+```bash
+poetry run pytest
+``` 
+
 # Задание для кандидата:
 
 Интерактивное консольное приложение, напоминающее интерфейс базы
