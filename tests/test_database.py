@@ -30,3 +30,30 @@ def test_transactions():
     assert db.get_value('a') == '2'
     db.rollback_transaction()
     assert db.get_value('a') == '1'
+
+
+def test_unset_in_transaction():
+    db = InMemoryDatabase()
+
+    db.set_value("A", "10")
+    assert db.get_value("A") == "10"
+
+    db.begin_transaction()
+    assert db.get_value("A") == "10"
+
+    db.set_value("A", "20")
+    assert db.get_value("A") == "20"
+
+    db.unset_value("A")
+    assert db.get_value("A") is None
+
+    db.rollback_transaction()
+    assert db.get_value("A") == "10"
+
+
+def test_commit_without_transaction():
+    db = InMemoryDatabase()
+    db.set_value("A", "10")
+
+    with pytest.raises(RuntimeError, match="No active transaction to commit."):
+        db.commit_transaction()

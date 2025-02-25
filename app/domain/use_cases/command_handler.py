@@ -20,6 +20,11 @@ class CommandHandler(BaseCommandHandler):
         strategy = self.command_strategies.get(command_name.upper())
         if strategy:
             return strategy(args)
+        if command_name.upper() == 'END':
+            if args:
+                return "Error: END command does not require arguments."
+            return 'END'
+
         return f"Error: Unknown command '{command_name}'."
 
     def set_command(self, args):
