@@ -48,16 +48,18 @@ class InMemoryDatabase(Database):
         self._transaction_stack.append({'data': {}})
 
     def commit_transaction(self):
+        if not self._transaction_stack:
+            raise RuntimeError("No active transaction to commit.")
+
+        current_transaction = self._transaction_stack.pop()
         if self._transaction_stack:
-            current_transaction = self._transaction_stack.pop()
-            if self._transaction_stack:
-                self._transaction_stack[-1]['data'].update(current_transaction['data'])
-            else:
-                for key, value in current_transaction['data'].items():
-                    if value is None:
-                        self._data.pop(key, None)
-                    else:
-                        self._data[key] = value
+            self._transaction_stack[-1]['data'].update(current_transaction['data'])
+        else:
+            for key, value in current_transaction['data'].items():
+                if value is None:
+                    self._data.pop(key, None)
+                else:
+                    self._data[key] = value
 
     def rollback_transaction(self):
         if self._transaction_stack:

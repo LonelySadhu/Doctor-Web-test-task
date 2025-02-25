@@ -7,3 +7,14 @@ def test_set_command():
     handler = CommandHandler(db)
     handler.execute_command('SET', ['a', '10'])
     assert db.get_value('a') == '10'
+
+
+def test_end_command():
+    db = InMemoryDatabase()
+    handler = CommandHandler(db)
+
+    result = handler.execute_command("END", [])
+    assert result == 'END'
+
+    result = handler.execute_command("END", ["extra_arg"])
+    assert result == "Error: END command does not require arguments."

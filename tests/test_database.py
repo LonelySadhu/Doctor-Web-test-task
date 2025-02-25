@@ -49,3 +49,11 @@ def test_unset_in_transaction():
 
     db.rollback_transaction()
     assert db.get_value("A") == "10"
+
+
+def test_commit_without_transaction():
+    db = InMemoryDatabase()
+    db.set_value("A", "10")
+
+    with pytest.raises(RuntimeError, match="No active transaction to commit."):
+        db.commit_transaction()
